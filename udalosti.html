@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="sk"><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oznamy - Gréckokatolícka farnosť Údol</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-row">
+        <a class="brand" href="index.html">
+        <span class="brand-badge">
+          <img class="brand-logo" src="erb_gr_po.png" alt="Erb farnosti" />
+        </span>
+            <span class="brand-text">Gréckokatolícka<br>farnosť Údol</span>
+        </a>
+
+        <nav class="nav" aria-label="Hlavná navigácia">
+            <a href="index.html" >Domov</a>
+            <a href="udol.html" >Údol</a>
+            <a href="hajtovka.html">Hajtovka</a>
+            <a href="oznamy.html">Oznamy</a>
+            <a href="udalosti.html" class="active" >Udalosti</a>
+            <a href="zivotviery.html">Život viery</a>
+            <a href="galeria.html">Fotogaléria</a>
+            <a href="kontakt.html">Kontakt</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container content-article">
+
+        <div class="container">
+        <div class="contact-header">
+            <h2>Udalosti farnosti</h2>
+        </div>
+
+
+        <div class="container" style="padding: 60px 20px;">
+
+            <!-- GRID UDALOSTÍ -->
+            <div class="events-grid">
+
+                <!-- Udalosť 1 -->
+                <article class="event-card-simple" onclick="openEventModal('Odpustová slávnosť', '26. 10. 2025', '10:00', 'Chrám sv. Dimitra', 'Srdečne vás pozývame na odpustovú slávnosť...')">
+                    <!-- OBRÁZOK -->
+                    <div class="event-image">
+                        <img src="biskup_oltar.jpg" alt="Odpustová slávnosť" loading="lazy">
+                    </div>
+
+                    <!-- TEXT -->
+                    <div class="event-content">
+                        <span class="event-date-simple">21. 4.</span>
+                        <h3>Posviacka obnovéného interiéru nášho chrámu</h3>
+                        <span class="btn-more">Viac info</span>
+                    </div>
+                </article>
+
+                <!-- Udalosť 2 -->
+                <article class="event-card-simple" onclick="openEventModal('Stretnutie mládeže', '15. 3. 2025', '18:00', 'Farská budova', 'Pravidelné stretnutie mládeže našej farnosti...')">
+                    <div class="event-image">
+                        <img src="IMG_1664.jpg" alt="Duchovna obnova v údole" loading="lazy">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-date-simple">22. 1. 2012</span>
+                        <h3>Duchovná obnova</h3>
+                        <span class="btn-more">Viac info</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+</div>
+    </div>
+
+</main>
+
+
+
+<footer class="site-footer">
+    <div class="container">
+        <small>© <span id="year">2026</span> Gréckokatolícka farnosť Údol. Všetky práva vyhradené.</small>
+    </div>
+</footer>
+
+
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+
+</body></html>

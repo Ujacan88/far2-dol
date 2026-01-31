@@ -1,0 +1,3001 @@
+/* =========================================
+ZÁKLADNÉ NASTAVENIA & PREMENNÉ
+========================================= */
+
+:root {
+
+    --bg: #f8fafc;
+
+    --text: #0f172a;
+
+    --muted: #475569;
+
+    --white: #ffffff;
+
+    --brand-color: #0f172a;
+
+    --font-base: clamp(16px, 1.2vw, 18px);
+
+    --font-h1: clamp(32px, 5vw, 56px);
+
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+
+    margin: 0; padding: 0;
+
+    font-family: 'Inter', system-ui, sans-serif;
+
+    font-size: var(--font-base);
+
+    color: var(--text);
+
+    background: var(--bg);
+
+    line-height: 1.6;
+
+    overflow-x: hidden;
+
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.container { width: min(1200px, 100% - 40px); margin: 0 auto; }
+
+/* =========================================
+HLAVIČKA (HEADER)
+========================================= */
+
+.site-header {
+
+    position: sticky; top: 0;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    backdrop-filter: blur(10px);
+
+    border-bottom: 1px solid #e2e8f0;
+
+    z-index: 100;
+
+    height: 70px;
+
+    overflow: visible;
+
+}
+
+/* Kontajner hlavičky – rozšírený z index.css */
+
+.header-row {
+
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    /* Dôležité: space-between roztiahne logo a menu od seba */
+
+    justify-content: space-between;
+
+    /* Nedovolíme zalomenie, kým to nie je nutné */
+
+    flex-wrap: nowrap;
+
+}
+
+/* Logo */
+
+.brand {
+
+    position: relative; display: inline-flex; align-items: center;
+
+    text-decoration: none; color: var(--brand-color);
+
+    font-family: 'Cinzel', serif; font-weight: 700; z-index: 101;
+
+    flex-shrink: 0;
+
+    margin-right: 20px;
+
+}
+
+.brand-badge {
+
+    position: absolute; top: 50%; left: 0;
+
+    transform: translateY(-25%);
+
+    width: 90px; height: 90px;
+
+    background: #fff; border: 1px solid #e2e8f0;
+
+    padding: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+    display: flex; align-items: center; justify-content: center;
+
+    border-radius: 8px;
+
+}
+
+.brand-logo { width: 100%; height: 100%; object-fit: contain; }
+
+.brand-text { padding-left: 105px; line-height: 1.2; font-size: 1.1rem; text-transform: uppercase; }
+
+/* Navigácia – zjednotená + rozšírená */
+
+.nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: clamp(8px, 2vw, 24px);
+
+}
+
+.nav a {
+
+    text-decoration: none; color: var(--muted);
+
+    font-weight: 500; font-size: 0.95rem;
+
+    text-transform: uppercase; letter-spacing: 0.05em;
+
+    transition: color 0.2s; padding: 8px 0;
+
+    white-space: nowrap;
+
+}
+
+.nav a:hover, .nav a.active { color: var(--text); font-weight: 700; }
+
+/* =========================================
+HERO SEKCIA (BANNERY)
+========================================= */
+
+.hero {
+
+    position: relative;
+
+    height: clamp(300px, 50vh, 500px);
+
+    display: grid; place-items: center;
+
+    color: var(--white);
+
+    /* Predvolený obrázok pre index.html */
+
+    background-image: url('2.jpg');
+
+    background-size: cover; background-position: center;
+
+}
+
+/* Špecifické bannery pre podstránky */
+
+.hero-udol { background-image: url('Cirkev_4.JPG'); }
+
+.hero-hajtovka { background-image: url('hajtovka-chram-narodenia-presvatej-bohorodicky_full.jpg'); }
+
+.hero-oznamy { background-image: url('Cirkev_2.JPG'); }
+
+.hero-udalosti { background-image: url('images/udalosti.jpg'); }
+
+.hero-zivot { background-image: url('images/viera-bg.jpg'); }
+
+.hero-foto { background-image: url('images/galeria-bg.jpg'); }
+
+.hero-kontakt { background-image: url('images/kontakt.jpg'); }
+
+.hero-overlay {
+
+    position: absolute; inset: 0;
+
+    background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.7));
+
+}
+
+.hero-content { position: relative; text-align: center; z-index: 2; padding: 0 20px; }
+
+.hero h1 {
+
+    font-family: 'Cinzel', serif; font-size: var(--font-h1);
+
+    margin: 0 0 16px; text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+
+}
+
+.hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+/* Menšia výška hero pre podstránky */
+
+.hero--small { height: clamp(200px, 30vh, 320px); }
+
+/* =========================================
+GRID KARIET (TRANSPARENT LOOK)
+========================================= */
+
+.parish-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 30px; padding: 60px 0;
+
+}
+
+/* Opravená parish-card (má aj flex + overlay úpravy + card-actions) */
+
+.parish-card {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    height: 420px;
+
+    background: transparent; border: none;
+
+    overflow: hidden; text-decoration: none; border-radius: 0;
+
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+}
+
+.card-link {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+}
+
+.card-link img {
+
+    width: 100%; height: 100%; object-fit: cover;
+
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+}
+
+.parish-card:hover { transform: translateY(-5px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35); }
+
+.parish-card:hover .card-link img { transform: scale(1.06); }
+
+/* Overlay – verzia s priestorom pre tlačidlo */
+
+.parish-overlay {
+
+    position: absolute; left: 0; right: 0; bottom: 0; top: 40%;
+
+    padding: 24px;
+
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0.9) 100%) !important;
+
+    display: flex; flex-direction: column;
+
+    justify-content: flex-end; gap: 4px; z-index: 2;
+
+    padding-bottom: 30px !important;
+
+}
+
+.parish-badge {
+
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+
+    color: rgba(255, 255, 255, 0.7); font-weight: 600; margin-bottom: 6px;
+
+}
+
+.parish-text h3 {
+
+    margin: 0; font-family: 'Inter', sans-serif;
+
+    font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em;
+
+    text-transform: uppercase; color: #ffffff;
+
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+
+}
+
+.parish-text p {
+
+    margin: 0; font-size: 0.95rem;
+
+    color: rgba(255, 255, 255, 0.85); font-weight: 400;
+
+}
+
+/* Kontajner pre tlačidlo */
+
+.card-actions {
+
+    margin-top: 15px;
+
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    transition: all 0.4s ease;
+
+    height: 0;
+
+    overflow: hidden;
+
+}
+
+.parish-card:hover .card-actions {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    height: auto;
+
+    overflow: visible;
+
+}
+
+/* Tlačidlo "Navigovať" */
+
+.btn-map {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background-color: rgba(255, 255, 255, 0.15);
+
+    backdrop-filter: blur(5px);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    color: #fff;
+
+    padding: 8px 16px;
+
+    border-radius: 20px;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    text-decoration: none;
+
+    letter-spacing: 0.05em;
+
+    transition: background 0.3s, border 0.3s;
+
+}
+
+.btn-map:hover {
+
+    background-color: #fff;
+
+    color: var(--brand-color);
+
+    border-color: #fff;
+
+}
+
+/* =========================================
+ŠTÝLY PRE ČLÁNKY (PODSTRÁNKY)
+========================================= */
+
+.content-article { max-width: 900px; padding: 60px 20px; line-height: 1.8; }
+
+.content-article section { margin-bottom: 3.5rem; }
+
+.content-article h2 {
+
+    font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 2.5vw, 2rem);
+
+    margin-top: 0; margin-bottom: 1.2rem; color: var(--text);
+
+    border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem;
+
+}
+
+.content-article p { margin-bottom: 1.2rem; text-align: justify; color: #334155; }
+
+/* Ostatné & Footer */
+
+.content h2 {
+
+    font-family: 'Cinzel', serif; margin-top: 3rem;
+
+    border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; display: inline-block;
+
+}
+
+.site-footer {
+
+    margin-top: 60px; padding: 40px 0;
+
+    background: #fff; border-top: 1px solid #e2e8f0;
+
+    color: var(--muted); text-align: center;
+
+}
+
+/* =========================================
+SMART RESPONZÍVNA TABUĽKA
+========================================= */
+
+.table-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+.liturgy-table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: #fff;
+
+    color: #1e293b;
+
+    font-size: 1rem;
+
+}
+
+/* Desktop */
+
+.liturgy-table th {
+
+    background: #f8fafc;
+
+    color: #64748b;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    font-size: 0.85rem;
+
+    padding: 16px;
+
+    border-bottom: 2px solid #e2e8f0;
+
+    text-align: left;
+
+}
+
+.liturgy-table td {
+
+    padding: 16px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    vertical-align: middle;
+
+}
+
+/* Zvýraznenie času a dátumu */
+
+.liturgy-table .time-cell { font-weight: 700; color: #000; text-align: center; }
+
+.liturgy-table .date-cell { font-weight: 600; }
+
+.liturgy-table .day-name { color: #666; }
+
+/* Nedeľa */
+
+.liturgy-table .sunday-row { background-color: #fafafa; }
+
+.liturgy-table .sunday-row td { border-bottom-color: #e2e8f0; }
+
+/* Mobilná verzia */
+
+@media screen and (max-width: 600px) {
+
+    .liturgy-table th:nth-child(2),
+
+    .liturgy-table td:nth-child(2) {
+
+        display: none;
+
+    }
+
+    .liturgy-table td, .liturgy-table th {
+
+        padding: 12px 8px;
+
+        font-size: 0.9rem;
+
+    }
+
+    .liturgy-table th:nth-child(1) { width: 20%; }
+
+    .liturgy-table th:nth-child(3) { width: 15%; text-align: center; }
+
+    .liturgy-table th:nth-child(4) { width: auto; }
+
+    .liturgy-table .time-cell {
+
+        font-weight: 800;
+
+        font-size: 0.95rem;
+
+        white-space: nowrap;
+
+    }
+
+}
+
+/* =========================================
+TLAČIDLO PROGRAM BOHOSLUŽIEB (BEZ IKONY)
+========================================= */
+
+.cta-section {
+
+    padding-top: 50px;
+
+    padding-bottom: 10px;
+
+    text-align: center;
+
+}
+
+.btn-program {
+
+    display: inline-block;
+
+    background-color: var(--brand-color);
+
+    color: var(--white);
+
+    padding: 18px 42px;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 1.1rem;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+    text-decoration: none;
+
+    text-align: center;
+
+    border-radius: 4px;
+
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    max-width: 90%;
+
+}
+
+.btn-program:hover {
+
+    transform: translateY(-3px);
+
+    background-color: #1e293b;
+
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+}
+
+@media (max-width: 600px) {
+
+    .btn-program {
+
+        width: 100%;
+
+        padding: 16px 20px;
+
+        font-size: 1rem;
+
+    }
+
+}
+
+/* =========================================
+KONTAKTNÁ SEKCIA
+========================================= */
+
+.contact-section {
+
+    padding: 80px 0;
+
+    background-color: var(--white);
+
+    border-top: 1px solid #e2e8f0;
+
+}
+
+.contact-header {
+
+    text-align: center;
+
+    max-width: 600px;
+
+    margin: 0 auto 60px;
+
+}
+
+.contact-header h2 {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: clamp(2rem, 4vw, 2.5rem);
+
+    margin-bottom: 16px;
+
+    color: var(--brand-color);
+
+}
+
+.contact-header p {
+
+    color: var(--muted);
+
+    font-size: 1.1rem;
+
+}
+
+/* Grid pre karty */
+
+.contact-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 40px;
+
+    text-align: center;
+
+}
+
+.contact-item {
+
+    padding: 30px 20px;
+
+    background: #fff;
+
+    border: 1px solid #f1f5f9;
+
+    border-radius: 8px;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.contact-item:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+
+    border-color: #e2e8f0;
+
+}
+
+/* Ikony v kruhu */
+
+.icon-circle {
+
+    width: 64px;
+
+    height: 64px;
+
+    background-color: #f1f5f9;
+
+    color: var(--brand-color);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+}
+
+.contact-item h3 {
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 1.25rem;
+
+    font-weight: 700;
+
+    color: var(--brand-color);
+
+    margin-bottom: 16px;
+
+}
+
+.contact-item p {
+
+    margin: 4px 0;
+
+    color: var(--muted);
+
+}
+
+.contact-item a {
+
+    color: var(--text);
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+    transition: color 0.2s;
+
+    border-bottom: 1px dotted #cbd5e1;
+
+}
+
+.contact-item a:hover {
+
+    color: var(--brand-color);
+
+    border-bottom-color: var(--brand-color);
+
+}
+
+/* Špecifické štýly pre IBAN */
+
+.iban {
+
+    font-family: monospace;
+
+    font-size: 1.1rem;
+
+    color: var(--text);
+
+    background: #f8fafc;
+
+    padding: 4px 8px;
+
+    border-radius: 4px;
+
+    display: inline-block;
+
+    margin-top: 5px !important;
+
+}
+
+.small-note {
+
+    font-size: 0.9rem !important;
+
+    opacity: 0.8;
+
+    margin-top: 10px !important;
+
+}
+
+/* =========================================
+ÚPRAVA GRID KARIET A TLAČIDLÁ (už hore pri parish-card)
+========================================= */
+
+/* =========================================
+MODERNÝ ZOZNAM BOHOSLUŽIEB (LITURGY FEED)
+========================================= */
+
+/* Kontajner pre zoznam */
+
+.liturgy-feed {
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 60px 0;
+
+    color: #1e293b;
+
+}
+
+/* Hlavička s dátumom týždňa */
+
+.feed-header {
+
+    text-align: center;
+
+    margin-bottom: 3rem;
+
+}
+
+.feed-header h2 {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 2.2rem;
+
+    font-weight: 700;
+
+    margin: 0;
+
+    color: #0f172a;
+
+}
+
+.feed-subtitle {
+
+    display: inline-block;
+
+    background: #f1f5f9;
+
+    padding: 6px 16px;
+
+    border-radius: 50px;
+
+    font-size: 0.95rem;
+
+    color: #64748b;
+
+    font-weight: 600;
+
+    margin-top: 12px;
+
+    font-family: 'Inter', sans-serif;
+
+}
+
+/* Sekcia farnosti / filiálky */
+
+.parish-section {
+
+    margin-bottom: 3rem;
+
+}
+
+.mt-50 { margin-top: 4rem; }
+
+.parish-label {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 1.1rem;
+
+    color: #1e293b;
+
+    margin-bottom: 1.5rem;
+
+    border-bottom: 2px solid #e2e8f0;
+
+    padding-bottom: 0.8rem;
+
+    font-weight: 700;
+
+}
+
+/* --- KARTA UDALOSTI --- */
+
+.event-card {
+
+    display: flex;
+
+    align-items: stretch;
+
+    background: #fff;
+
+    border: 1px solid #f1f5f9;
+
+    border-left: 4px solid transparent;
+
+    padding: 24px;
+
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    border-radius: 8px;
+
+    margin-bottom: 12px;
+
+    width: 100%;
+
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+
+}
+
+.event-card:hover {
+
+    background: #fff;
+
+    border-left-color: var(--brand-color);
+
+    border-color: #e2e8f0;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08);
+
+}
+
+/* --- ĽAVÝ STĹPEC: DÁTUM --- */
+
+.event-date {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding-top: 4px;
+
+    width: 75px;
+
+    flex-shrink: 0;
+
+    border-right: 1px solid #e2e8f0;
+
+    margin-right: 24px;
+
+    padding-right: 16px;
+
+}
+
+.day-num {
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 1.3rem;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    color: #0f172a;
+
+    letter-spacing: -0.02em;
+
+    white-space: nowrap;
+
+}
+
+.day-name {
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 0.75rem;
+
+    text-transform: uppercase;
+
+    font-weight: 700;
+
+    color: #94a3b8;
+
+    margin-top: 6px;
+
+    text-align: center;
+
+}
+
+/* --- PRAVÝ STĹPEC: DETAILY --- */
+
+.event-details {
+
+    flex-grow: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 8px;
+
+}
+
+/* Riadok s časom a tónom */
+
+.event-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-bottom: 2px;
+
+}
+
+.time-badge {
+
+    background: #0f172a;
+
+    color: #fff;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+
+    padding: 5px 12px;
+
+    border-radius: 6px;
+
+    display: inline-block;
+
+    font-family: 'Inter', sans-serif;
+
+}
+
+.tone-badge {
+
+    font-size: 0.75rem;
+
+    text-transform: uppercase;
+
+    font-weight: 600;
+
+    color: #64748b;
+
+    border: 1px solid #cbd5e1;
+
+    padding: 3px 8px;
+
+    border-radius: 4px;
+
+    background: #f8fafc;
+
+}
+
+/* Hlavný nadpis sviatku */
+
+.liturgy-title {
+
+    margin: 4px 0;
+
+    font-size: 1.1rem;
+
+    font-weight: 800;
+
+    color: #b45309;
+
+    text-transform: uppercase;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.01em;
+
+}
+
+/* Detail o svätcovi */
+
+.saint-detail {
+
+    font-size: 0.95rem;
+
+    color: #475569;
+
+    font-style: italic;
+
+    line-height: 1.5;
+
+    margin-bottom: 4px;
+
+}
+
+/* Úmysel */
+
+.event-intent {
+
+    font-size: 1.05rem;
+
+    line-height: 1.6;
+
+    color: #334155;
+
+}
+
+.event-intent strong {
+
+    color: #0f172a;
+
+    font-weight: 600;
+
+}
+
+.note {
+
+    color: #94a3b8;
+
+    font-size: 0.9rem;
+
+    font-style: italic;
+
+}
+
+.highlight-text {
+
+    color: var(--brand-color);
+
+    font-weight: 600;
+
+}
+
+/* --- ŠPECIÁLNA KARTA: NEDEĽA --- */
+
+.sunday-card {
+
+    background: linear-gradient(to right bottom, #fffbeb, #ffffff);
+
+    border: 1px solid #fcd34d;
+
+    border-left: 4px solid #d97706;
+
+}
+
+.sunday-card .event-date {
+
+    border-right-color: #fce7b0;
+
+}
+
+.sunday-card .day-num { color: #b45309; }
+
+.sunday-card .day-name { color: #d97706; }
+
+.sunday-badge {
+
+    background: #d97706 !important;
+
+}
+
+/* --- FARSKÉ OZNAMY (BOX) --- */
+
+.notice-board {
+
+    background: #f8fafc;
+
+    border-radius: 8px;
+
+    padding: 30px;
+
+    margin-top: 30px;
+
+    border: 2px dashed #cbd5e1;
+
+}
+
+.notice-board h4 {
+
+    font-family: 'Cinzel', serif;
+
+    margin: 0 0 20px 0;
+
+    font-size: 1.1rem;
+
+    color: #475569;
+
+    text-transform: uppercase;
+
+    font-weight: 700;
+
+    letter-spacing: 0.05em;
+
+}
+
+.notice-board ul {
+
+    margin: 0;
+
+    padding-left: 0;
+
+    list-style: none;
+
+}
+
+.notice-board li {
+
+    position: relative;
+
+    padding-left: 28px;
+
+    margin-bottom: 12px;
+
+    line-height: 1.6;
+
+    color: #334155;
+
+    font-size: 1.05rem;
+
+}
+
+.notice-board li::before {
+
+    content: "•";
+
+    color: var(--brand-color);
+
+    font-weight: bold;
+
+    font-size: 1.5rem;
+
+    position: absolute;
+
+    left: 0;
+
+    top: -6px;
+
+}
+
+/* Linky v aktualitách */
+
+.notice-board a {
+
+    color: var(--brand-color);
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    border-bottom: 1px solid transparent;
+
+    transition: border-bottom 0.2s;
+
+}
+
+.notice-board a:hover {
+
+    border-bottom-color: var(--brand-color);
+
+}
+
+@media (max-width: 600px) {
+
+    .liturgy-feed { padding: 40px 0; }
+
+    .feed-header h2 { font-size: 1.6rem; }
+
+    .event-card {
+
+        padding: 16px;
+
+        margin-bottom: 10px;
+
+    }
+
+    .event-date {
+
+        width: 60px;
+
+        margin-right: 16px;
+
+        padding-right: 10px;
+
+    }
+
+    .day-num { font-size: 1.15rem; }
+
+    .day-name { font-size: 0.7rem; }
+
+    .liturgy-title { font-size: 1rem; }
+
+    .event-intent { font-size: 1rem; }
+
+}
+
+/* =========================================
+2-STĹPCOVÝ LAYOUT PRE PROGRAM BOHOSLUŽIEB
+========================================= */
+
+.liturgy-two-col {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 40px;
+
+    align-items: start;
+
+}
+
+.liturgy-col {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+
+}
+
+.liturgy-col .parish-section {
+
+    margin-bottom: 0;
+
+}
+
+/* Mobil: stĺpce pod seba */
+
+@media (max-width: 900px) {
+
+    .liturgy-two-col {
+
+        grid-template-columns: 1fr;
+
+        gap: 28px;
+
+    }
+
+}
+
+/* =========================================
+NEWS TICKER & MODAL (POSUVNÉ AKTUALITY)
+========================================= */
+
+/* Obalovač */
+
+.news-ticker-wrapper {
+
+    background: #fff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 8px;
+
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+    overflow: hidden;
+
+    position: relative;
+
+    /* Pevná výška pre oblasť noviniek */
+
+    height: 380px;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+/* Hlavička tickera */
+
+.news-header {
+
+    background: #f8fafc;
+
+    padding: 16px 20px;
+
+    border-bottom: 1px solid #e2e8f0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+.news-header h4 {
+
+    margin: 0;
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 1rem;
+
+    color: var(--brand-color);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+}
+
+.live-dot {
+
+    width: 10px;
+
+    height: 10px;
+
+    background: #ef4444;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+
+    animation: pulse 2s infinite;
+
+}
+
+@keyframes pulse {
+
+    0% { transform: scale(0.95); opacity: 0.7; }
+
+    50% { transform: scale(1.1); opacity: 1; }
+
+    100% { transform: scale(0.95); opacity: 0.7; }
+
+}
+
+/* Posuvný kontajner */
+
+.news-ticker-container {
+
+    flex-grow: 1;
+
+    overflow: hidden;
+
+    position: relative;
+
+    /* Maska pre fade efekt hore a dole */
+
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+
+}
+
+.news-ticker-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 10px 0;
+
+    /* Animácia pre posun hore */
+
+    animation: scrollUp 20s linear infinite;
+
+}
+
+.news-ticker-content:hover {
+
+    animation-play-state: paused;
+
+}
+
+@keyframes scrollUp {
+
+    0% { transform: translateY(0); }
+
+    100% { transform: translateY(-100%); }
+
+}
+
+/* Jednotlivá položka */
+
+.news-item {
+
+    padding: 15px 20px;
+
+    border-bottom: 1px dashed #e2e8f0;
+
+    cursor: pointer;
+
+    transition: background 0.2s;
+
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 12px;
+
+}
+
+.news-item:hover {
+
+    background: #f1f5f9;
+
+}
+
+.news-date {
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    color: var(--muted);
+
+    background: #e2e8f0;
+
+    padding: 2px 8px;
+
+    border-radius: 4px;
+
+    white-space: nowrap;
+
+    text-transform: uppercase;
+
+}
+
+.news-text {
+
+    font-size: 0.95rem;
+
+    color: var(--text);
+
+    line-height: 1.4;
+
+    font-weight: 500;
+
+}
+
+/* --- MODAL (VYSKAKOVACIE OKNO) --- */
+
+.modal-overlay {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(15, 23, 42, 0.8);
+
+    backdrop-filter: blur(4px);
+
+    z-index: 9999;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+.modal-overlay.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+}
+
+.modal-content {
+
+    background: #fff;
+
+    width: 100%;
+
+    max-width: 500px;
+
+    padding: 40px;
+
+    border-radius: 12px;
+
+    position: relative;
+
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+    transform: translateY(20px);
+
+    transition: transform 0.3s ease;
+
+    text-align: center;
+
+}
+
+.modal-overlay.active .modal-content {
+
+    transform: translateY(0);
+
+}
+
+.modal-close {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 20px;
+
+    background: none;
+
+    border: none;
+
+    font-size: 2rem;
+
+    color: #94a3b8;
+
+    cursor: pointer;
+
+    transition: color 0.2s;
+
+}
+
+.modal-close:hover {
+
+    color: var(--brand-color);
+
+}
+
+.modal-content h3 {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 1.5rem;
+
+    color: var(--brand-color);
+
+    margin-top: 0;
+
+    margin-bottom: 1rem;
+
+}
+
+.modal-content p {
+
+    color: var(--muted);
+
+    font-size: 1.05rem;
+
+    line-height: 1.6;
+
+    margin-bottom: 2rem;
+
+}
+
+.modal-btn {
+
+    display: inline-block;
+
+    background: var(--brand-color);
+
+    color: #fff;
+
+    padding: 12px 28px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    font-size: 0.95rem;
+
+    transition: background 0.2s;
+
+}
+
+.modal-btn:hover {
+
+    background: #1e293b;
+
+}
+
+/* =========================================
+SEKCIA PATRÓN (SV. DEMETER)
+========================================= */
+
+.patron-section {
+
+    margin: 4rem 0;
+
+}
+
+.patron-section h2 {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 1.8rem;
+
+    color: var(--brand-color);
+
+    margin-bottom: 1.5rem;
+
+    border-bottom: 2px solid #e2e8f0;
+
+    padding-bottom: 10px;
+
+}
+
+.patron-container {
+
+    display: flex;
+
+    gap: 30px;
+
+    align-items: flex-start;
+
+}
+
+.patron-image {
+
+    flex-shrink: 0;
+
+    width: 250px;
+
+}
+
+.patron-image img {
+
+    margin-top: 30px;
+
+    width: 120%;
+
+    height: auto;
+
+    border-radius: 4px;
+
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+    border: 1px solid #e2e8f0;
+
+}
+
+.patron-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1.5rem;
+
+}
+
+/* TLAČIDLO */
+
+.btn-patron {
+
+    display: inline-block;
+
+    background-color: transparent;
+
+    color: var(--brand-color);
+
+    font-family: 'Inter', sans-serif;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    font-size: 0.9rem;
+
+    padding: 12px 28px;
+
+    border: 1px solid var(--brand-color);
+
+    border-radius: 4px;
+
+    text-decoration: none;
+
+    letter-spacing: 0.05em;
+
+    transition: all 0.3s ease;
+
+}
+
+.btn-patron:hover {
+
+    background-color: var(--brand-color);
+
+    color: #fff;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+}
+
+/* RESPONZIVITA */
+
+@media (max-width: 700px) {
+
+    .patron-container {
+
+        flex-direction: column;
+
+        align-items: center;
+
+    }
+
+    .patron-image {
+
+        width: 100%;
+
+        max-width: 300px;
+
+    }
+
+    .patron-content {
+
+        align-items: center;
+
+    }
+
+    .patron-content p {
+
+        text-align: left;
+
+    }
+
+    .btn-patron {
+
+        width: 100%;
+
+        text-align: center;
+
+    }
+
+}
+
+/* =========================================
+SEKCIA KŇAZI
+========================================= */
+
+.priests-section {
+
+    margin-top: 5rem;
+
+}
+
+.priests-section h2 {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 1.8rem;
+
+    color: var(--brand-color);
+
+    margin-bottom: 2rem;
+
+    border-bottom: 2px solid #e2e8f0;
+
+    padding-bottom: 15px;
+
+}
+
+.priests-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+    gap: 20px;
+
+}
+
+.priest-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+
+}
+
+.priest-card:hover {
+
+    border-color: #cbd5e1;
+
+    background-color: #fcfcfc;
+
+}
+
+/* Foto - kruh */
+
+.priest-photo {
+
+    width: 60px;
+
+    height: 60px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+    border: 1px solid #e2e8f0;
+
+    background-color: #f8fafc;
+
+}
+
+.priest-photo img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+.priest-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+.priest-info h3 {
+
+    margin: 0 0 4px 0;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 1.05rem;
+
+    font-weight: 600;
+
+    color: var(--text);
+
+}
+
+.priest-year {
+
+    font-size: 0.85rem;
+
+    color: var(--muted);
+
+    font-family: monospace;
+
+}
+
+/* Súčasný kňaz */
+
+.current-priest {
+
+    background-color: #f8fafc;
+
+    border-color: #cbd5e1;
+
+}
+
+.current-priest h3 {
+
+    color: var(--brand-color);
+
+    font-weight: 700;
+
+}
+
+/* =========================================
+GALÉRIA V TEXTE (PÁS FOTIEK) + LIGHTBOX
+========================================= */
+
+.inline-gallery {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 0;
+
+    width: 100%;
+
+    margin: 40px 0;
+
+}
+
+.inline-gallery a {
+
+    flex: 1 1 20%;
+
+    min-width: 120px;
+
+    height: 160px;
+
+    display: block;
+
+    overflow: hidden;
+
+    position: relative;
+
+    border: 1px solid #333;
+
+}
+
+.inline-gallery img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.3s ease, filter 0.3s ease;
+
+    filter: grayscale(30%);
+
+}
+
+/* Hover efekt na miniatúry */
+
+.inline-gallery a:hover img {
+
+    transform: scale(1.1);
+
+    filter: grayscale(0%);
+
+    z-index: 2;
+
+}
+
+/* Responzivita */
+
+@media (max-width: 800px) {
+
+    .inline-gallery a { flex: 1 1 33.33%; height: 140px; }
+
+}
+
+@media (max-width: 500px) {
+
+    .inline-gallery a { flex: 1 1 50%; height: 120px; }
+
+}
+
+/* Úprava vzhľadu Lightboxu */
+
+.sl-overlay {
+
+    background: rgba(0, 0, 0, 0.95) !important;
+
+}
+
+.sl-wrapper .sl-image .sl-caption {
+
+    background: rgba(0, 0, 0, 0.8);
+
+    color: #fff;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 14px;
+
+    padding: 10px 20px;
+
+    border-radius: 30px;
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    bottom: 20px;
+
+    position: absolute;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: auto;
+
+    max-width: 80%;
+
+    text-align: center;
+
+}
+
+/* Vynútené zväčšenie fotiek v SimpleLightbox */
+
+.sl-wrapper .sl-image {
+
+    position: fixed !important;
+
+    top: 50% !important;
+
+    left: 50% !important;
+
+    transform: translate(-50%, -50%) !important;
+
+    width: auto !important;
+
+    height: auto !important;
+
+    max-width: none !important;
+
+}
+
+.sl-wrapper .sl-image img {
+
+    min-width: 85vw !important;
+
+    max-height: 85vh !important;
+
+    object-fit: contain !important;
+
+    display: block !important;
+
+    margin: 0 auto !important;
+
+    background: black;
+
+}
+
+@media (max-width: 800px) {
+
+    .sl-wrapper .sl-image img {
+
+        min-width: 95vw !important;
+
+        height: auto !important;
+
+    }
+
+}
+
+/* =========================================
+JEDNODUCHÉ KARTY UDALOSTÍ - FINAL LAYOUT
+========================================= */
+
+.events-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+    gap: 30px;
+
+    width: 100%;
+
+    margin: 0 auto;
+
+}
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+
+    .events-grid {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+/* Mobil */
+
+@media (max-width: 650px) {
+
+    .events-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+    }
+
+}
+
+/* Vzhľad karty */
+
+.event-card-simple {
+
+    background: #fff;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    height: 100%;
+
+    transition: all 0.3s ease;
+
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+}
+
+/* Hover efekt len na PC */
+
+@media (hover: hover) {
+
+    .event-card-simple:hover {
+
+        transform: translateY(-5px);
+
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+
+        border-color: #cbd5e1;
+
+    }
+
+    .event-card-simple:hover .event-image img {
+
+        transform: scale(1.08);
+
+    }
+
+}
+
+/* Obrázok */
+
+.event-image {
+
+    width: 100%;
+
+    height: 200px;
+
+    background: #f1f5f9;
+
+    overflow: hidden;
+
+    position: relative;
+
+}
+
+.event-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.6s ease;
+
+}
+
+/* Obsah */
+
+.event-content {
+
+    padding: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex-grow: 1;
+
+}
+
+.event-date-simple {
+
+    font-size: 0.85rem;
+
+    color: var(--muted);
+
+    font-weight: 700;
+
+    margin-bottom: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+.event-date-simple::before {
+
+    content: '';
+
+    display: block;
+
+    width: 20px;
+
+    height: 2px;
+
+    background: var(--brand-color);
+
+}
+
+.event-card-simple h3 {
+
+    font-family: 'Cinzel', serif;
+
+    font-size: 1.3rem;
+
+    color: var(--brand-color);
+
+    margin: 0 0 20px 0;
+
+    line-height: 1.4;
+
+    font-weight: 700;
+
+}
+
+/* Tlačidlo */
+
+.btn-more {
+
+    margin-top: auto;
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+
+    color: var(--brand-color);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+    border-top: 1px solid #f1f5f9;
+
+    padding-top: 16px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    text-decoration: none;
+
+}
+
+.btn-more::after {
+
+    content: "→";
+
+    transition: transform 0.2s;
+
+}
+
+.event-card-simple:hover .btn-more::after {
+
+    transform: translateX(4px);
+
+}
+
+/* Mobilné úpravy */
+
+@media (max-width: 650px) {
+
+    .event-card-simple {
+
+        border-radius: 10px;
+
+        min-height: auto;
+
+    }
+
+    .event-image {
+
+        height: auto;
+
+        aspect-ratio: 16 / 9;
+
+    }
+
+    .event-content {
+
+        padding: 20px;
+
+    }
+
+    .event-card-simple h3 {
+
+        font-size: 1.2rem;
+
+        margin-bottom: 15px;
+
+    }
+
+}
+
+/* =========================================
+RESPONZIVITA (MOBIL & TABLET) – HLAVIČKA, HERO, KARTY
+========================================= */
+
+@media (max-width: 820px) {
+
+    .site-header { height: auto; padding: 12px 0; }
+
+    .header-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+
+    .brand-badge {
+
+        width: 60px; height: 60px; transform: translateY(0);
+
+        position: relative; top: auto; left: auto; margin-right: 12px;
+
+    }
+
+    .brand { width: 100%; }
+
+    .brand-text { padding-left: 0; font-size: 1rem; }
+
+    .nav { width: 100%; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 12px; }
+
+    /* MOBIL: Tlačidlo v kartách vždy viditeľné */
+
+    .card-actions {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+        height: auto;
+
+        margin-top: 12px;
+
+    }
+
+    .btn-map {
+
+        background-color: rgba(255, 255, 255, 0.9);
+
+        color: var(--brand-color);
+
+        width: 100%;
+
+        justify-content: center;
+
+        padding: 10px;
+
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .parish-card { height: 350px; }
+
+    .parish-overlay {
+
+        padding: 16px;
+
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.95) 100%);
+
+    }
+
+    .content-article { padding: 40px 20px; }
+
+    .content-article p { text-align: left; }
+
+}
+
+@media (max-width: 480px) {
+
+    .nav { flex-direction: column; align-items: center; gap: 8px; }
+
+    .nav a { width: 100%; text-align: center; background: #f1f5f9; border-radius: 6px; }
+
+    .hero h1 { font-size: 28px; }
+
+    .container { width: calc(100% - 32px); }
+
+}
+
+/* =========================================
+AKTUALITY & OZNAMY (nový blok pre index)
+========================================= */
+
+.updates {
+    padding: 60px 0;
+}
+
+.updates-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 12px;
+}
+
+.updates-header h2 {
+    margin: 0;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    color: var(--brand-color);
+}
+
+.updates-all {
+    text-decoration: none;
+    font-weight: 800;
+    color: var(--brand-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 0.2s, opacity 0.2s;
+    opacity: 0.9;
+}
+
+.updates-all:hover {
+    opacity: 1;
+    border-bottom-color: var(--brand-color);
+}
+
+.updates-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 18px;
+    align-items: start;
+}
+
+/* Ľavý stĺpec – oznamy */
+
+.updates-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.u-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+@media (hover: hover) {
+    .u-card:hover {
+        transform: translateY(-2px);
+        border-color: #cbd5e1;
+        box-shadow: 0 18px 30px rgba(0,0,0,0.07);
+    }
+}
+
+.u-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.u-date {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.u-tag {
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    color: #475569;
+    white-space: nowrap;
+}
+
+.u-tag--soft {
+    border-color: #e2e8f0;
+    background: #ffffff;
+}
+
+.u-card--important {
+    border-color: #f59e0b;
+    background: linear-gradient(180deg, #fffbeb, #ffffff);
+}
+
+.u-card--important .u-tag {
+    border-color: #f59e0b;
+    background: #f59e0b;
+    color: #111827;
+}
+
+.u-card h3 {
+    margin: 0 0 10px 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    color: var(--text);
+}
+
+.u-card p {
+    margin: 0;
+    color: #334155;
+    line-height: 1.6;
+}
+
+.u-link {
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    text-decoration: none;
+    color: var(--brand-color);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.82rem;
+}
+
+.u-link::after {
+    content: "→";
+    transition: transform 0.2s ease;
+}
+
+.u-card:hover .u-link::after {
+    transform: translateX(4px);
+}
+
+/* Pravý stĺpec – “Najbližšie” + linky */
+
+.updates-side {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.side-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.side-card h3 {
+    margin: 0 0 12px 0;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--brand-color);
+}
+
+.next-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px solid #f1f5f9;
+}
+
+.next-item:first-of-type {
+    border-top: none;
+    padding-top: 0;
+}
+
+.next-date {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    padding: 8px 6px;
+    text-align: center;
+}
+
+.next-day {
+    font-size: 0.75rem;
+    font-weight: 900;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.next-num {
+    font-family: monospace;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-top: 4px;
+}
+
+.next-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+.next-time {
+    background: var(--brand-color);
+    color: #fff;
+    font-weight: 900;
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 8px;
+}
+
+.next-pill {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    padding: 3px 8px;
+    border-radius: 999px;
+}
+
+.next-title {
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.next-note {
+    margin-top: 4px;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.side-btn {
+    margin-top: 12px;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+
+    background-color: var(--brand-color);
+    color: var(--white);
+    padding: 12px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.side-btn:hover {
+    transform: translateY(-2px);
+    background: #1e293b;
+}
+
+.quick-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.q-link {
+    text-decoration: none;
+    color: var(--brand-color);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+
+    padding: 12px 10px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    text-align: center;
+}
+
+.q-link:hover {
+    background: #fff;
+    border-color: #cbd5e1;
+}
+
+/* Responzivita */
+@media (max-width: 900px) {
+    .updates-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 650px) {
+    .updates-header { flex-direction: column; align-items: flex-start; }
+    .quick-links { grid-template-columns: 1fr; }
+}
+
+/* =========================================
+AKTUALITY v PRAVOM STĹPCI (sidebar)
+========================================= */
+
+.updates--sidebar {
+    width: 100%;
+    margin-top: 28px;              /* oddelenie od predchádzajúcej sekcie */
+    padding-top: 28px;
+    border-top: 1px solid #e2e8f0; /* jasné oddelenie od programu/oznamov */
+}
+
+.updates--sidebar .updates-header {
+    margin-bottom: 18px;
+}
+
+.updates--sidebar .updates-header h2 {
+    margin: 0;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+    color: var(--brand-color);
+}
+
+.updates--sidebar .updates-header h2::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: #e2e8f0;
+    margin-top: 14px;
+    width: 100%;
+}
+
+.updates--sidebar .updates-grid {
+    display: block;   /* len jeden stĺpec */
+    width: 100%;
+}
+
+.updates--sidebar .updates-col {
+    width: 100%;
+    margin: 0;        /* zruší prípadné centrovanie */
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Karty nech sa roztiahnu na 100% */
+.updates--sidebar .u-card {
+    width: 100%;
+}
+
+/* ================================
+   FIX: vycentrované a responzívne gridy
+   (parish-grid + contact-grid)
+================================ */
+
+/* spoločné správanie */
+.parish-grid,
+.contact-grid {
+    /* nech sú gridy pekne v strede stránky aj mimo .container */
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* centrovanie stĺpcov keď nie je plný riadok */
+    justify-content: center;
+
+    /* bezpečný vnútorný okraj (aby to nelietalo na kraje) */
+    padding-left: 20px;
+    padding-right: 20px;
+
+    /* lepší gap na veľkých obrazovkách */
+    gap: clamp(16px, 3vw, 40px);
+}
+
+/* parish grid špecifiká */
+.parish-grid {
+    /* zachovaj tvoj top/bottom spacing, ale nech je responzívny */
+    padding-top: clamp(28px, 5vw, 60px);
+    padding-bottom: clamp(28px, 5vw, 60px);
+
+    /* mierne flexibilnejšia minimálna šírka, aby sa to skôr skladalo */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* contact grid špecifiká */
+.contact-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* Mobile doladenie */
+@media (max-width: 600px) {
+    .parish-grid,
+    .contact-grid {
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 16px;
+    }
+
+    .parish-grid {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+
+    /* aby karta nebola zbytočne vysoká na malých displejoch */
+    .parish-card {
+        height: auto;
+        min-height: 320px;
+    }
+}
+
+/* Dvoj-tlačidlo na úvodnej stránke */
+.cta-section.cta-duo .container{
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-program--secondary{
+    background-color: transparent;
+    color: var(--brand-color);
+    border: 2px solid var(--brand-color);
+    box-shadow: none;
+}
+
+.btn-program--secondary:hover{
+    background-color: var(--brand-color);
+    color: var(--white);
+}
+
+/* Mobil: tlačidlá pod seba a na 100% */
+@media (max-width: 600px){
+    .cta-section.cta-duo .container{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cta-section.cta-duo .btn-program{
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* CTA na úvodnej stránke – menšia medzera hore + rovnaký font */
+.cta-section.cta-duo{
+    padding-top: 18px;   /* bolo 50px v .cta-section */
+    padding-bottom: 10px; /* nechaj ako máš */
+}
+
+.cta-section.cta-duo .btn-program{
+    font-family: 'Inter', sans-serif; /* rovnaké ako globálne */
+}
+
+/* ak chceš ešte menšiu medzeru na mobile */
+@media (max-width: 600px){
+    .cta-section.cta-duo{
+        padding-top: 12px;
+    }
+}
